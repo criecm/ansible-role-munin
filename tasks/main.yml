@@ -5,9 +5,9 @@
   vars:
     params:
       files:
-        - '{{ ansible_os_family }}-{{ ansible_distribution_major_version | default(ansible_distribution_version) }}.yml'
-        - '{{ ansible_os_family }}.yml'
-        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_facts["os_family"] }}-{{ ansible_facts["distribution"]_major_version | default(ansible_facts["distribution_version"]) }}.yml'
+        - '{{ ansible_facts["os_family"] }}.yml'
+        - '{{ ansible_facts["distribution"] }}.yml'
         - main.yml
       paths:
         - vars
@@ -17,7 +17,7 @@
 - name: munin master
   include_tasks: master.yml
   when: munin_host == inventory_hostname and munin_role == 'master'
-  #or ( munin_host not in ansible_play_batch and munin_aggr_templates | count > 0 )
+  #or ( munin_host not in ansible_facts["play_batch"] and munin_aggr_templates | count > 0 )
   tags: munin-master,vars
 
 - name: munin node

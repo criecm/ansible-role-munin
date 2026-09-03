@@ -1,6 +1,6 @@
 ---
 - name: install munin-node
-  include_tasks: '{{ ansible_os_family }}-node.yml'
+  include_tasks: '{{ ansible_facts["os_family"] }}-node.yml'
   tags: munin-node
 
 - name: munin allow servers
@@ -73,7 +73,7 @@
   copy:
     dest: '{{ munin_host_dir }}/ansible-host-{{ inventory_hostname }}.conf'
     content: |
-      [{{ ansible_fqdn }}]
+      [{{ ansible_facts["fqdn"] }}]
       {% if munin_async %}
       address ssh://munin-async@{{ inventory_hostname }}{% if ansible_port | default(False) %}:{{ ansible_port }}{% endif %}
       {% else %}

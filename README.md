@@ -55,7 +55,7 @@ Note you'll have to call criecm.munin on munin_host explicitely to install them
           - 192.0.2.3
           - 203.0.113.18
         munin_plugins:
-          - 'snmp__if_multi snmp_{{ ansible_fqdn | regex_replace("\.","_") }}_if_multi'
+          - 'snmp__if_multi snmp_{{ ansible_facts["fqdn"] | regex_replace("\.","_") }}_if_multi'
           - '/my/own/munin/plugin'
         munin_configs:
           myplugin: |

@@ -1,6 +1,6 @@
 ---
 - name: install munin master
-  include_tasks: '{{ ansible_os_family }}-master.yml'
+  include_tasks: '{{ ansible_facts["os_family"] }}-master.yml'
 
 - name: config master
   lineinfile:
